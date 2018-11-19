@@ -1,0 +1,14 @@
+book.pdf
+util/*
+/inzva/w4-online/solutions
+/inzva/w2-onsite
+*.css
+*.js
+*.png
+*.jpg
+*.html
+*.out
+*.gif
+*.svg
+*/template.cpp
+*template.cpp
