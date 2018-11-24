@@ -1,0 +1,227 @@
+	IO
+	
+	ios_base::sync_with_stdio(false);
+	int a;
+	string st;
+	cin>>a>>st;
+	_____________________________________________________________
+	
+	READING INTS
+
+	int N, E;
+	cin >> N >> E;
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	_______________________________
+	
+	int a, b;
+	scanf("%d%d", &a, &b);
+	____________________________________
+	
+	//Read multiple ints in same line
+	string input;
+	getline(cin, input);
+	stringstream stream(input);
+	while(1) {
+	   int n;
+	   stream >> n;
+	   if(!stream) break;
+	   cout << "Found integer: " << n << endl;
+	}
+	__________________________________________________________________________________
+
+	STRINGS
+
+	char a[max_n];
+	scanf("%s", a);
+	int n = strlen(a);
+	
+	//  Use of strlen() can be avoided by:
+	for (i=0; s[i]; i++) {}
+	// loop breaks when the character array ends.
+	_____________________
+
+	string s;
+	cin >> s;
+	int n= s.size();
+	s[i] etc
+	_________________________
+
+	string s;
+	getline(cin ,s );
+	
+	int n= s.size();
+	s[i] -> ith char of string s
+	s.erase(5,3) -> 5den başla 3 char sil
+	_______________________________________________________________________________
+
+	ARRAY
+	int a[nmax];
+	int a[10] = {0};
+	
+	sort(a, a+n);
+	reverse(a, a+n);
+	random_shuffle(a, a+n);
+	
+	Çok buyuk elemanlı arrayları main içinde tanımlama -> stack doluyor.
+	Ya vector kullan, ya da global tanımla.
+	_______________________________________________________________________________
+
+	VECTOR
+	vector<int> v;
+	vector<int> v(10);		// size 10, initial value 0
+	vector<int> v(10, 5);	// size 10, initial value 5
+	vector<int> v = {2,4,2,5,1};
+
+	v.push_back(2);		//add last
+	int a = v.back()	//get last element
+	int a = v[i]		//get ith element
+	v.pop_back();		//remove last element
+
+	sort(v.begin(), v.end());
+	reverse(v.begin(), v.end());
+	random_shuffle(v.begin(), v.end());
+
+	vector<pair<int,int>> v;
+	v.push_back({a,b})
+	int a = v[0].first;
+	int b = v[0].second;
+	
+	vector<int>::iterator up = upper_bound(v.begin(),v.end(), val);
+    vector<int>::iterator lo = lower_bound(v.begin(),v.end(), val);
+    
+    cout << val <<": " << up - h.begin() <<", " << lo - h.begin() << endl;
+    Example
+    v = {1, 2, 2, 3}
+    val	 up	 lo
+    1:	 1	 0
+	2:	 3	 1
+	4:	 4	 4
+	__________________________________________________________________________
+	
+	ITERATORs
+	
+	auto it = v.begin();  	// *it is first element
+    auto nx = next(it, 2);  // *nx is third element 
+ 
+	__________________________________________________________________________
+	
+	PRIORITY QUEUE
+
+	priority_queue<int> q;
+	q.push(3);	//add last
+	q.pop();	//remove biggest element
+	q.top(); 	//get biggest element
+	
+	priority_queue<pair<int,int>> q;
+	!once ilk elemanları karşılaştırır, eşitse ikincileri karşılaştırır.
+
+	!if you want to smallest first
+	priority_queue<int,vector<int>,greater<int>> q;
+
+	__________________________________________________________________________________
+
+	SET
+	Each element distinct, if you want multiples -> multiset
+	elemanlar sıralı
+	add, search, delete -> O(logn)
+
+	set<int> s;
+	set<int> s = {2,5,6,8};
+
+	unordered_set<int> s; 	-> hash set (elemanlar sıralı değil)
+
+	s.insert(3);
+	s.erase(3);
+	s.count(3);
+
+	for (auto x : s) {
+		cout << x << "\n";
+	}
+
+	same function with above and below
+
+	for (auto it = s.begin(); it != s.end(); it++) {
+		cout << *it << "\n";
+	}
+
+
+	auto it = s.find(x);
+	if (it == s.end()) {
+		// x is not found
+	}
+
+	___________________________________________________________________________________
+
+	MAP
+	Each key-value distinct, if you want multiples value with same key-> multimap
+	map -> keyler 
+
+	unordered_map<int,int> mp 	-> hash map (elemana ulasmak constant time, but keyler sıralı değil)
+
+	map<int,int> mp;
+	mp[a]		-> the value of key a  !! Eğer a yoksa default valuelu bir a olusturup ona doner;
+	mp[a]++ 
+	mp.erase(a);  // erase the content with key a
+
+	if (m.count(a)) {
+		// key a exists
+	}
+
+	for (auto x : mp) {
+		x.first  -> key
+		x.second  ->value
+	}
+
+	auto search = example.find(2);
+	if(search != example.end()) {
+		cout << "Found " << search->first << " " << search->second << '\n';
+	} else {
+		cout << "Not found\n";
+	}
+
+	__________________________________________________________________________
+
+	QUEUE
+	fifo // add back, remove front
+
+	queue<int> q;
+	q.push(3);	//add last
+	q.pop();	//remove first element
+
+	q.front(); 	//get first element
+	q.back(); 	//get last element
+	__________________________________________________________________________
+
+
+	DEQUE
+	add and remove from both back and front 
+
+	deque<int> d;
+	d.push_back(5); 	// [5]
+	d.push_back(2); 	// [5,2]
+	d.push_front(3);	// [3,5,2]
+	d.pop_back(); 		// [3,5]
+	d.pop_front(); 		// [5]
+
+
+	__________________________________________________________________________
+
+	STACK
+	filo //add and remove from back
+
+	stack<int> s;
+	s.push(3);	//add last
+	s.top(); 	//get last added element
+	s.pop();	//remove last added element
+	
+	__________________________________________________________________________
+
+	
+
+	
+	
+	
+	
+	
+	
+	
