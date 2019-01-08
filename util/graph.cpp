@@ -35,7 +35,7 @@ int dist[N];
 
 void dfs(int x) {
 	vis[x] = true;
-	// process node s
+	// process node x
 	
 	for (auto u: adj[x]) {
 		if (vis[u]) continue;
@@ -114,7 +114,7 @@ void bfs(int x) {
 			int node = u.fi;
 			if (vis[node]) continue;
 			vis[node] = true;
-			dist[node] = dist[s]+1;
+			dist[node] = dist[s]+u.se;
 			q.push(node);
 		}
 	}

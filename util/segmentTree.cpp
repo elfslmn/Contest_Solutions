@@ -74,5 +74,73 @@ main{
 	update(1,1,np,x,val2)
 	
 }
+___________________________________________________________________________
+
+//SEGMENT TREE 2ND IMPLEMENTAION
+
+// tree[ind] dizinin [l,r] araliginin cevabini saklar.
+void build(int ind,int l,int r) {
+	if (l == r) { // leaf
+		tree[ind] = a[l]; //bu dugum dizinin l. elamaninin cevabini saklar
+	}
+	else {
+		int mid = (l + r) / 2;
+		build(ind * 2,l,mid);
+		build(ind * 2 + 1,mid + 1,r);
+		// [l,r] araliginin cevabini[l,mid] ve [mid + 1,r] araliklarinin cevaplarinin birlesmesiyle olusur.
+		tree[ind] = tree[ind * 2] + tree[ind * 2 + 1];
+	}
+	return;
+}
+
+//ind : current processed index in segment tree
+// [lq,rq] sorguda cevabini aradigimiz aralik.
+// [l,r] ise agactaki ind nolu node'da cevabini sakladigimiz aralik.
+int query(int ind,int l,int r,int lq,int rq) {
+	if (l > rq or r < lq) //bulundugumuz aralik cevabini aradigimiz araligin disinda.
+		return 0;
+	if (l >= lq and r <= rq) //cevabini aradigimiz aralik bu araligi tamamen kapsiyor.
+		return tree[ind];
+	int mid = (l + r) / 2;
+	return query(ind * 2,l,mid,lq,rq) + query(ind * 2 + 1,mid + 1,r,lq,rq);
+}
+
+void update(int ind,int l,int r,int x,int val) {
+	if (l > x || r < x) //bulundugumuz aralik x indeksli elemani icermiyor.
+		return;
+	if (l == x and r == x) {
+		tree[ind] = val; //x indeksli elemani iceren yaprak dugumunun cevabini guncelliyoruz.
+		return;
+	}
+	int mid = (l + r) / 2;
+	update(ind * 2,l,mid,x,val); // update left tree
+	update(ind * 2 + 1,mid + 1,r,x,val); // update right tree
+	tree[ind] = tree[ind * 2] + tree[ind * 2 + 1]; // update tree
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
  
