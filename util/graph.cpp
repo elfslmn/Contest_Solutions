@@ -127,36 +127,37 @@ ________________________________________________________________________________
 
 // 1 - BELLMANN FORD	O(nm)
 // use edges rep. , use when there is negative wieghts
-// x: start node, n: number of nodes
-// return false if there is a negative cycle
+// x: start node, n: number of nodes, m: number of edges
+// u,v: directed node, w: edge wieght
+ 
+        vector<tuple<int,int,int>> edges;
+        // read edges
+        FOR(i,1,m){
+            sc3(u,v,w);
+            edges.pb(make_tuple(u,v,w));
+        }
 
-vector<tuple<int,int,int>> edges;
-int dist[N]; // min distance to start node
+        VI dist(n,INF); // dist: min distance to start node
+    	dist[x] = 0;    
 
-bool bellmannFord(int x, int n){
-	for (int i = 1; i <= n; i++) dist[i] = INF;
-	dist[x] = 0;
-	
-	// Relax all edges n-1 times
-	for (int i = 1; i <= n-1; i++) {
-		for (auto e : edges) {
-			int a, b, w;
-			tie(a, b, w) = e;
-			dist[b] = min(dist[b], dist[a]+w);
-		}
-	}
-	
-	// check negative cycle with one more relaxation
-	for (auto e : edges) {
-		int a, b, w;
-		tie(a, b, w) = e;
-		dist[b] = min(dist[b], dist[a]+w);
-		if (dist[a] != INF && dist[a] + w < dist[v]){
-			return false;
-		}
-	}
-	return true;
-}
+    	// Relax all edges n-1 times
+    	for (int i = 1; i <= n-1; i++) {
+    		for (auto e : edges) {
+    			tie(u, v, w) = e;
+    			dist[v] = min(dist[v], dist[u]+w);
+    		}
+    	}
+
+    	// check negative cycle with one more relaxation
+    	for (auto e : edges) {
+            tie(u, v, w) = e;
+            int temp = dist[v];
+            dist[v] = min(dist[v], dist[u]+w);
+    		if (temp != INF && dist[v] < temp){
+    			printf("Negative cycle detected!");
+                break;
+    		}
+    	}
 
 //_________________________________________________________________________
 
@@ -204,27 +205,63 @@ int adj[N][N]; 		 // weighted adjacency matrix
 int dist[N][N];
 
 void floydWarshall(int n){
-	// initialize
-	for (int i = 1; i <= n; i++) {
-		for (int j = 1; j <= n; j++) {
-			if (i == j) dist[i][j] = 0;
-			else if (adj[i][j]) dist[i][j] = adj[i][j];
-			else dist[i][j] = INF;
-		}
-	}
-	
-	//iterate
-	for (int k = 1; k <= n; k++) {
-		for (int i = 1; i <= n; i++) {
-			for (int j = 1; j <= n; j++) {
-				dist[i][j] = min(dist[i][j],dist[i][k]+v[k][j]);
-			}
-		}
-	}
+	    // initialize
+    FOR(i,1,n){
+        FOR(j,1,n) {
+            if (i == j) dist[i][j] = 0;
+            else if (adj[i][j] != 0) dist[i][j] = adj[i][j];
+            else dist[i][j] = INF;
+        }
+    }
 
+    //iterate
+    FOR(k,1,n){
+        FOR(i,1,n){
+            FOR(j,1,n) {
+                dist[i][j] = min(dist[i][j],dist[i][k]+dist[k][j]);
+            }
+        }
+    }
 }
+//_______________________________________________________________________________
 
+"Minimum Spanning Tree (MSP)"
 
+1- Prim's algorithm O(mlogn)
+	- similar Dijkstra (keep edge weights instead of distances in pr.queue)
+	- use adj. lists rep.
+	- better for dense graphs ( node az, edge fazla)
+
+2- Kruskal's algorithm O(m+ nlogn)  //check Union_find_msp file
+	- edgeleri weightlerine göre sırala (use edge list rep.)
+	- başta hiç edge yok
+	- küçükten başlayarak eğer edge cycle olusturmuyorsa ekle.
+	- better for sparse graphs ( node fazla, edge az)
+
+//_________________________________________________________________________________
+
+// PRIM'S MSP
+	// res = min sum of edges a MSP
+	VPII adj[n+1];
+    vector<bool> vis(n+1, false);
+    priority_queue<PII> q; // {-edge weight, node id}
+    q.push({0,s});
+    ll res = 0;
+    while (!q.empty()) {
+        int a = q.top().second;
+        int wa = q.top().fi*-1;
+        q.pop();
+        if (vis[a]) continue;
+        vis[a] = true;
+        res += wa;
+
+        for (auto u : adj[a]) {
+            int b = u.first, w = u.second;
+            q.push({-w,b});
+        }
+    }
+    PRL(res);
+//____________________________________________________________________________________
 
 
 

@@ -23,8 +23,7 @@ bool same(int a, int b) {
 	return find(a) == find(b);	
 }
 
-
-//msp
+//Kruskal's Minimum spanning tree
 //edgeleri uzunluğuna göre küçükten buyuge sırala
 // construct graph
 for (edge btw a and b) {

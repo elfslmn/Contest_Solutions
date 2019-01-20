@@ -53,6 +53,26 @@
 	s[i] -> ith char of string s
 	s.erase(5,3) -> 5den başla 3 char sil
 	_______________________________________________________________________________
+	
+	PAIR
+	pair p = {3,'a'};
+	p.first  -> 3
+	p.second -> 'a'
+	
+	vector<pair<type, type>
+	_______________________________________________________________________________
+	
+	TUPLE
+	tuple t = make_tuple(10, "Test", 3.14);  	// You can add more elements
+	get<0>(t) -> 10
+	
+	tie(a,b,c) = t ;
+	a -> 10
+	b -> "Test"
+	c -> 3.14
+	
+	vector<tuple<type, type, ...>>
+	_______________________________________________________________________________ 
 
 	ARRAY
 	int a[nmax];
