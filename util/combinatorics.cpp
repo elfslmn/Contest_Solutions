@@ -1,7 +1,49 @@
+"COMBINATION"  - order is not important
+
+C(n,k) = n! / [(n-k)! * k! ]
+
+vector< vector<ll> > savedVal;
+
+ll combination(int n, int k){
+	// Base condition
+	if(k == n || k == 0) {
+		savedVal[n][k] = 1LL;
+		return savedVal[n][k];
+	}
+
+	// Base condition
+	if(k == n-1 || k == 1){
+		savedVal[n][k] = (long long)n;
+		return savedVal[n][k];
+	}
+
+	if(savedVal[n][k] != 0) 
+		return savedVal[n][k];
+
+	// Save the output of the recursion
+	savedVal[n][k] = (combination(n-1, k) + combination(n-1, k-1));
+	return savedVal[n][k];
+}
+
+int main() {
+	int n,k;
+	// Read the input and resize the array
+	scanf("%d %d", &n, &k);
+	savedVal.resize(n+1, vector<ll>(k+1, 0LL));
+
+	ll combinationVal = combination(n, k);
+
+	printf("The output is %lld\n", combinationVal);
+
+	return 0;
+}
+____________________________________________________________________________________________
+
 "PERMUTATION"  - order is important
 
 // to find only distirubution count -> P(n,k) = n! / (n-k)!
-long long mult = 1, destination = n - k;
+ll mult = 1;
+ll destination = n - k;
 while(n > destination){
 	mult *= n;
 	n--;
@@ -22,7 +64,7 @@ int main () {
   } 
   while ( next_permutation(myints,myints+3) );
 
- std::cout << "After loop: " << myints[0] << ' ' << myints[1] << ' ' << myints[2] << '\n';
+  cout << "After loop: " << myints[0] << ' ' << myints[1] << ' ' << myints[2] << '\n';
 
   return 0;
 }
@@ -61,12 +103,6 @@ int main(){
 	return 0;
 }
 __________________________________________________________________________________________________________
-
-
-
-
-
-
 
 
 

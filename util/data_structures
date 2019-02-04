@@ -27,6 +27,15 @@
 	   if(!stream) break;
 	   cout << "Found integer: " << n << endl;
 	}
+	
+	___________________________________________
+	
+	LIMITS
+	
+	INT_MIN		-32767 (-2^15+1)
+	INT_MAX		32767  ( 2^15-1) 
+	LLONG_MIN	-9223372036854775807 (-2^63+1) 
+	LLONG_MAX	9223372036854775807  ( 2^63-1) 
 	__________________________________________________________________________________
 
 	STRINGS
@@ -121,8 +130,18 @@
 	ITERATORs
 	
 	auto it = v.begin();  	// *it is first element
-    auto nx = next(it, 2);  // *nx is third element 
- 
+    auto nx = next(it, 2);  // *nx is third element !! it + 2 wont work
+    
+    distance(v.begin(),nx) will be 2 
+    
+	arr: | a | b | c | d |		when it is 0 -> *it will be "a"
+	it : 0   1   2   3   4
+	   begin 			end
+	
+	it = lower_bound(arr, arr+size, b) -> it is 1
+	it = upper_bound(arr, arr+size, b) -> it is 2
+	
+	count(v.begin(), v.end(), x) 	//To count the occurrences of x in vector.
 	__________________________________________________________________________
 	
 	PRIORITY QUEUE

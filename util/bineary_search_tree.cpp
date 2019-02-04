@@ -1,8 +1,9 @@
-#include <bits/stdc++.h> 
-using namespace std; 
+"BST"
+The data value of EVERY node in a node's left subtree is less than node itself.
+The data value of EVERY node in a node's right subtree is greater than node itself.
   
 struct Node { 
-    int key; 
+    int data; 
     struct Node *left, *right; 
 }; 
   
@@ -10,7 +11,7 @@ struct Node {
 Node* newNode(int item) 
 { 
     Node* temp = new Node; 
-    temp->key = item; 
+    temp->data = item; 
     temp->left = temp->right = NULL; 
     return temp; 
 } 
@@ -20,48 +21,46 @@ void inorder(Node* root)
 { 
     if (root != NULL) { 
         inorder(root->left); 
-        printf("%d ", root->key); 
+        printf("%d ", root->data); 
         inorder(root->right); 
     } 
 } 
   
 /* A utility function to insert a new node with given key in BST */
-Node* insert(Node* node, int key) 
+Node* insert(Node* node, int val) 
 { 
     /* If the tree is empty, return a new node */
     if (node == NULL) 
-        return newNode(key); 
+        return newNode(val); 
   
     /* Otherwise, recur down the tree */
-    if (key < node->key) 
-        node->left = insert(node->left, key); 
+    if (val < node->data) 
+        node->left = insert(node->left, val); 
     else
-        node->right = insert(node->right, key); 
+        node->right = insert(node->right, val); 
   
     /* return the (unchanged) node pointer */
     return node; 
 } 
   
 /* Given a binary search tree and a key, this function deletes the key and returns the new root */
-Node* deleteNode(Node* root, int k) 
+Node* deleteNode(Node* root, int val) 
 { 
     // Base case 
     if (root == NULL) 
         return root; 
   
-    // Recursive calls for ancestors of 
-    // node to be deleted 
-    if (root->key > k) { 
-        root->left = deleteNode(root->left, k); 
+    // Recursive calls for ancestors of node to be deleted 
+    if (root->data > val) { 
+        root->left = deleteNode(root->left, val); 
         return root; 
     } 
-    else if (root->key < k) { 
-        root->right = deleteNode(root->right, k); 
+    else if (root->dadta < val) { 
+        root->right = deleteNode(root->right, val); 
         return root; 
     } 
   
-    // We reach here when root is the node 
-    // to be deleted. 
+    // We reach here when root is the node to be deleted. 
   
     // If one of the children is empty 
     if (root->left == NULL) { 
@@ -89,12 +88,11 @@ Node* deleteNode(Node* root, int k)
   
         // Delete successor.  
         // Since successor is always left child of its parent 
-        // we can safely make successor's right 
-        // right child as left of its parent. 
+        // we can safely make successor's right right child as left of its parent. 
         succParent->left = succ->right; 
   
         // Copy Successor Data to root 
-        root->key = succ->key; 
+        root->data = succ->data; 
   
         // Delete Successor and return root 
         delete succ;          
