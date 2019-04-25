@@ -1,7 +1,5 @@
 	// Subset of an n-element set
-
 	arr[n];
-
 	for (int b = 0; b < (1<<n); b++) {
 		vector<int> subsetIndices;
 		for (int i = 0; i < n; i++) {
@@ -58,10 +56,14 @@
 	cout << __gcd(5,5) << endl;  //5
 	cout << __gcd(5,0) << endl;  //5
 	cout << __gcd(0,5) << endl;	 //5
-	cout << __gcd(0,0) << endl;  //0      
-		    
-		    
-		    
-		    
-		    
-	_______________________________________________________________________
+	cout << __gcd(0,0) << endl;  //0    
+	
+	ll calculateGCD(ll n, ll m){
+		ll temp = 0;
+		while(n != 0){
+			temp = n;
+			n = m%n;
+			m = temp;
+		}
+		return m;
+	}  	    

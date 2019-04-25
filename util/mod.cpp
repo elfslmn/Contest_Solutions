@@ -1,3 +1,22 @@
+// For only find gcd
+ll calculateGCD(ll n, ll m){
+	ll temp = 0;
+	while(n != 0){
+		temp = n;
+		n = m%n;
+		m = temp;
+	}
+	return m;
+}
+________________________________________________
+
+// Find even-odd without using mod
+if (num & 1)
+   cout << "ODD";
+else
+   cout << "EVEN";
+_____________________________________________________________
+
 "Modular Operations"
 // x is INVERSE of a in mod m.  -> ax = 1 (mod m)
 // x exist iff gcd(a,m) = 1
@@ -5,8 +24,7 @@
 // Extended Euclidean Algorithm  O(logm)
 int gcdExtended(int a, int b, int *x, int *y) 
 { 
-    if (a == 0) 
-	{ 
+    if (a == 0){ 
         *x = 0, *y = 1; 
         return b; 
     } 
@@ -19,7 +37,7 @@ int gcdExtended(int a, int b, int *x, int *y)
   
     return gcd; 
 } 
-
+_______________________________________________________
 // Recursive - function to find modulo inverse of a  
 void modInverse(int a, int m) 
 { 
@@ -33,7 +51,6 @@ void modInverse(int a, int m)
         cout << "Modular multiplicative inverse is " << res; 
     } 
 } 
- 
 ______________________________________________________
 
 //for modular multiplication without any overflow 
@@ -69,33 +86,5 @@ int add(int x, int y)
         x += MOD;
     return x;
 }
-________________________________________________
 
-// Find even-odd without using mod
-if (num & 1)
-   cout << "ODD";
-else
-   cout << "EVEN";
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
+  

@@ -4,7 +4,7 @@ C(n,k) = n! / [(n-k)! * k! ]
 
 vector< vector<ll> > savedVal;
 
-ll combination(int n, int k){
+ll combination(int n, int k){	// Time and space = O(nk)
 	// Base condition
 	if(k == n || k == 0) {
 		savedVal[n][k] = 1LL;

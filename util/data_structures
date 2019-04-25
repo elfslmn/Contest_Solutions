@@ -1,31 +1,41 @@
-	
+
 	PROFILING
-	
+
 	- For all memory usage and time profilling		/usr/bin/time -v ./a.out
 	- Only for time									time ./a.out
 	- Performance profiling							perf record -g ./a.out
 													perf report
 	______________________________________________________________________________
-	
-	IO
-	
-	ios_base::sync_with_stdio(false);
-	int a;
-	string st;
-	cin>>a>>st;
-	_____________________________________________________________
-	
-	READING INTS
 
-	int N, E;
-	cin >> N >> E;
-	cin.ignore(numeric_limits<streamsize>::max(), '\n');
-	_______________________________
+	IO
+	ios_base::sync_with_stdio(false);
+	_____________________________________
 	
-	int a, b;
-	scanf("%d%d", &a, &b);
-	____________________________________
+	FILE READING	
 	
+	#include <fstream>
+	ofstream outfile;
+    outfile.open("file.txt");
+    outfile << "Writing to the file" << endl;
+    outfile.close();
+    
+    ifstream infile; 
+    infile.open("file.txt"); 
+    infile >> str; 
+    infile.close();
+    
+    fstream  afile;
+	afile.open("file.txt, ios::out | ios::in ); -> both in and out
+	
+	ios::app	Append mode. 
+	ios::ate	Open for output and move the read/write control to end.
+	ios::in		Open for reading.
+	ios::out	Open for writing.
+	ios::trunc	If file already exists, its contents will be deleted.
+	_____________________________________________________________
+
+	READING LINES
+
 	//Read multiple ints in same line
 	string input;
 	getline(cin, input);
@@ -36,70 +46,49 @@
 	   if(!stream) break;
 	   cout << "Found integer: " << n << endl;
 	}
-	
 	___________________________________________
-	
+
 	LIMITS
-	
+
 	INT_MIN		-2147483648 (-2^31 + 1)	 ~2.10^9
-	INT_MAX		 2147483647 ( 2^31 - 1) 
+	INT_MAX		 2147483647 ( 2^31 - 1)
 	LLONG_MIN	-9223372036854775807 (-2^63+1) ~9.10^18
-	LLONG_MAX	 9223372036854775807 ( 2^63-1) 
-	__________________________________________________________________________________
+	LLONG_MAX	 9223372036854775807 ( 2^63-1)
+	________________________________________________________________________
 
 	STRINGS
 
-	char a[max_n];
+	char a[max_n];	-> loop ile olustururken sonuna /0 koymayı unutma
 	scanf("%s", a);
 	int n = strlen(a);
-	
-	//  Use of strlen() can be avoided by:
-	for (i=0; s[i]; i++) {}
-	// loop breaks when the character array ends.
 	_____________________
 
 	string s;
 	cin >> s;
 	int n= s.size();
-	s[i] etc
 	_________________________
 
 	string s;
 	getline(cin ,s );
-	
 	int n= s.size();
 	s[i] -> ith char of string s
+	
 	s.erase(5,3) -> 5den başla 3 char sil
+	string s(4, 'A'); -> "AAAA" 
+	printf("%s \n", str.c_str());  -> c_str(), give a pointer to char array 
 	_______________________________________________________________________________
-	
-	PAIR
-	pair p = {3,'a'};
-	p.first  -> 3
-	p.second -> 'a'
-	
-	vector<pair<type, type>
-	_______________________________________________________________________________
-	
-	TUPLE
-	tuple t = make_tuple(10, "Test", 3.14);  	// You can add more elements
-	get<0>(t) -> 10
-	
-	tie(a,b,c) = t ;
-	a -> 10
-	b -> "Test"
-	c -> 3.14
-	
-	vector<tuple<type, type, ...>>
-	_______________________________________________________________________________ 
 
 	ARRAY
 	int a[nmax];
-	int a[10] = {0};
-	
+	int a[5] = {0};	// all 5 zero
+	int a[]  = {1,2,3,4}
+	int a[5] = {1,2}	// 1 2 0 0 0
+
 	sort(a, a+n);
 	reverse(a, a+n);
 	random_shuffle(a, a+n);
-	
+	memset(a, 0, sizeof(a)); 
+
 	Çok buyuk elemanlı arrayları main içinde tanımlama -> stack doluyor.
 	Ya vector kullan, ya da global tanımla.
 	_______________________________________________________________________________
@@ -123,10 +112,10 @@
 	v.push_back({a,b})
 	int a = v[0].first;
 	int b = v[0].second;
-	
+
 	vector<int>::iterator up = upper_bound(v.begin(),v.end(), val);
     vector<int>::iterator lo = lower_bound(v.begin(),v.end(), val);
-    
+
     cout << val <<": " << up - h.begin() <<", " << lo - h.begin() << endl;
     Example
     v = {1, 2, 2, 3}
@@ -135,23 +124,57 @@
 	2:	 3	 1
 	4:	 4	 4
 	__________________________________________________________________________
-	
+
 	ITERATORs
-	
+
 	auto it = v.begin();  	// *it is first element
     auto nx = next(it, 2);  // *nx is third element !! it + 2 wont work
-    
-    distance(v.begin(),nx) will be 2 
-    
+
+    distance(v.begin(),nx) will be 2
+
 	arr: | a | b | c | d |		when it is 0 -> *it will be "a"
 	it : 0   1   2   3   4
 	   begin 			end
-	
+
 	it = lower_bound(arr, arr+size, b) -> it is 1
 	it = upper_bound(arr, arr+size, b) -> it is 2
-	
+
 	count(v.begin(), v.end(), x) 	//To count the occurrences of x in vector.
 	__________________________________________________________________________
+	
+	PAIR
+	pair p = {3,'a'};
+	p.first  -> 3
+	p.second -> 'a'
+
+	vector<pair<type, type>>
+	_______________________________________________________________________________
+
+	TUPLE
+	tuple t = make_tuple(10, "Test", 3.14);  	// You can add more elements
+	get<0>(t) -> 10
+
+	tie(a,b,c) = t ;
+	a -> 10
+	b -> "Test"
+	c -> 3.14
+
+	vector<tuple<type, type, ...>>
+	_______________________________________________________________________________
+	
+	BITSET
+	
+	bitset<4> bs; 	: 0000
+	bitset<4> bs(6)	: 0110
+	bitset<4> bs(string("11")) : 0011
+	
+	bs[0] -> least significant bit !!!
+	numberof1 = bs.count();  -> number of 1s
+	
+	bs.reset()	: all zero		)
+	bs.set()	: all ones		) they can be used with indices bs.flip(2) etc
+	bs.flip()					)
+	___________________________________________________________________________
 	
 	PRIORITY QUEUE
 
@@ -159,14 +182,13 @@
 	q.push(3);	//add last
 	q.pop();	//remove biggest element
 	q.top(); 	//get biggest element
-	
+
 	priority_queue<pair<int,int>> q;
 	!once ilk elemanları karşılaştırır, eşitse ikincileri karşılaştırır.
 
 	!if you want to smallest first
-	priority_queue<int,vector<int>,greater<int>> q;
-
-	__________________________________________________________________________________
+	priority_queue<int, vector<int>, greater<int>> q;
+	_____________________________________________________________________________
 
 	SET
 	Each element distinct, if you want multiples -> multiset
@@ -186,29 +208,25 @@
 		cout << x << "\n";
 	}
 
-	same function with above and below
-
 	for (auto it = s.begin(); it != s.end(); it++) {
 		cout << *it << "\n";
 	}
-
 
 	auto it = s.find(x);
 	if (it == s.end()) {
 		// x is not found
 	}
-
-	___________________________________________________________________________________
+	_________________________________________________________________________________
 
 	MAP
 	Each key-value distinct, if you want multiples value with same key-> multimap
-	map -> keyler 
+	map -> keyler
 
-	unordered_map<int,int> mp 	-> hash map (elemana ulasmak constant time, but keyler sıralı değil)
+	unordered_map<int,int> mp 	-> hash map 
 
 	map<int,int> mp;
-	mp[a]		-> the value of key a  !! Eğer a yoksa default valuelu bir a olusturup ona doner;
-	mp[a]++ 
+	mp[a]		-> the value of key a  
+	mp[a]++		-> !! Eğer a yoksa default valuelu bir a olusturup ona doner
 	mp.erase(a);  // erase the content with key a
 
 	if (m.count(a)) {
@@ -226,7 +244,6 @@
 	} else {
 		cout << "Not found\n";
 	}
-
 	__________________________________________________________________________
 
 	QUEUE
@@ -240,10 +257,9 @@
 	q.back(); 	//get last element
 	__________________________________________________________________________
 
-
 	DEQUE
-	add and remove from both back and front 
-	Can access element with indices by [] operator or .at() function in constant time.
+	add and remove from both back and front
+	! Can access element with indices in constant time.
 
 	deque<int> d;
 	d.push_back(5); 	// [5]
@@ -253,8 +269,6 @@
 	d.at(0) = 1			// [1,4,2]
 	d.pop_back(); 		// [1,4]
 	d.pop_front(); 		// [4]
-
-
 	__________________________________________________________________________
 
 	STACK
@@ -264,15 +278,23 @@
 	s.push(3);	//add last
 	s.top(); 	//get last added element
 	s.pop();	//remove last added element
+	___________________________________________________________________________
 	
+	LIST
+	doubly linked list
+	slow traversal but 
+	insertion and deletion constant 
+	
+	list<int> l;
+	l.push_back() , push_front()
+	l.pop_back() , pop_front() 
+	
+	list<int>::iterator it = l.begin(); 
+	next(it, 2); 
+	l.insert(it, 5); 
+	l.erase(it); 
+	
+	for (auto it = l.begin(); it != demoList.end(); it++) { 
+        cout << *it << " "; 
+    } 
 	__________________________________________________________________________
-
-	
-
-	
-	
-	
-	
-	
-	
-	

@@ -46,6 +46,8 @@ bool cmp(int a, int b){
 }
 
 sort(arr, arr+n, cmp)  -> küçükten buyuge sıralar
+== sort(arr, arr+n , greater<int> ) 
+priority_queue<int, vector<int>, greater<int>> q;
 _____________________________________________________________
 
 bool cmp(int a, int b){
@@ -54,12 +56,6 @@ bool cmp(int a, int b){
 }
 
 sort(arr, arr+n, cmp)  -> buyukten kuçüğe sıralar
-_____________________________________________________________
-
-Bu sekilde baska comparator functionlar tanımlayabilirsin
- 
-!! a nın b den önce geldiği duruma true donmen lazım
-!! cmp(x,x) -> false olmalı
 _____________________________________________________________
 
 "Strick weak ordering rules"
